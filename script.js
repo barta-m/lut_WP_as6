@@ -1,4 +1,5 @@
 let currentPopulationData = [];
+let municipalityCode;
 
 async function fetchPopulationDataDefault(){
     const url = 'https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px';
@@ -167,5 +168,7 @@ window.onload = fetchPopulationDataDefault();
 if (municipalityCode) {
     localStorage.setItem('municipalityCode', municipalityCode);
     fetchPopulationData(municipalityCode);
+} else {
+    return
 }
 
