@@ -1,5 +1,6 @@
 let birthData = [];
 let deathData = [];
+let municipalityCode;
 
 async function fetchBirthAndDeathData(municipalityCode) {
     const url = 'https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px';
@@ -74,31 +75,25 @@ async function fetchBirthAndDeathData(municipalityCode) {
 
     const births = await fetch(url, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: {'content-type': 'application/json'},
         body: JSON.stringify(query1),
     });
-
     const data = await births.json();
     birthData = data.value;
 
     const deaths = await fetch(url, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: {'content-type': 'application/json'},
         body: JSON.stringify(query2),
     });
-
     const data2 = await deaths.json();
     deathData = data2.value;
+
     createChart(birthData, deathData);
 }
 
 function createChart(birthData, deathData) {
     const labels = [...Array(2022 - 2000).keys()].map(i => (2000 + i).toString());
-
     const chart = new frappe.Chart("#chart", {
         title: "Births and Deaths Data",
         data: {
