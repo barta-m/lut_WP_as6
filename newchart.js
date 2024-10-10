@@ -94,28 +94,33 @@ async function fetchBirthAndDeathData(municipalityCode) {
 
 function createChart(birthData, deathData) {
     const labels = [...Array(2022 - 2000).keys()].map(i => (2000 + i).toString());
-    const data = { labels: labels,
-    datasets: [
-        {
-            name: "Births",
-            values: birthData,
-            type: "bar"
-        },
-        {
-            name: "Deaths",
-            values: deathData,
-            type: "bar"
-        }
-    ]}
+    const data = { 
+        labels: labels,
+        datasets: [
+            {
+                name: "Births",
+                values: birthData,
+                type: 'bar'
+            },
+            {
+                name: "Deaths",
+                values: deathData,
+                type: 'bar'
+            }
+        ]
+    }
     const chart = new frappe.Chart("#chart", {
         title: "Births and Deaths Data",
         data: data,
-        type: "bar",
+        type: 'bar',
         height: 450,
         colors: ["#63d0ff", "#363636"],
+        barOptions: {
+            stacked: 0
+        },
         axisOptions: {
-            yAxisMode: 'span', // Set the y-axis mode
-            xIsSeries: true // Specify x-axis as series
+            yAxisMode: 'span',
+            xIsSeries: true
         },
     });
 }
