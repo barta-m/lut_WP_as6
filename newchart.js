@@ -79,7 +79,7 @@ async function fetchBirthAndDeathData(municipalityCode) {
         body: JSON.stringify(query1),
     });
     const data = await births.json();
-    birthData = data.value;
+    birthData = data.value.slice();
 
     const deaths = await fetch(url, {
         method: "POST",
@@ -87,7 +87,7 @@ async function fetchBirthAndDeathData(municipalityCode) {
         body: JSON.stringify(query2),
     });
     const data2 = await deaths.json();
-    deathData = data2.value;
+    deathData = data2.value.slice();
 
     createChart(birthData, deathData);
 }
@@ -102,25 +102,16 @@ function createChart(birthData, deathData) {
                 {
                     name: "Births",
                     values: birthData,
-                    //chartType: "bar",
-                    //color: "#63d0ff"
                 },
                 {
                     name: "Deaths",
                     values: deathData,
-                    //chartType: "bar",
-                    //color: "#363636"
                 }
             ]
         },
         type: "bar",
         height: 450,
         colors: ["#63d0ff", "#363636"],
-        // axisOptions: {
-        //     xAxisMode: "tick",
-        //     yAxisMode: "span",
-        //     xIsSeries: true
-        // }
     });
 }
 
