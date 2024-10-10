@@ -47,6 +47,7 @@ async function fetchPopulationDataDefault(){
     const data = await res.json();
     const years = Object.keys(data.dimension.Vuosi.category.label);
     const population = data.value;
+    currentPopulationData = population; 
     createChart(years, population);
 }
 
