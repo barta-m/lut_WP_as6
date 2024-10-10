@@ -79,7 +79,7 @@ async function fetchBirthAndDeathData(municipalityCode) {
         body: JSON.stringify(query1),
     });
     const data = await births.json();
-    birthData = data.value.slice();
+    birthData = data.value;
 
     const deaths = await fetch(url, {
         method: "POST",
@@ -87,7 +87,7 @@ async function fetchBirthAndDeathData(municipalityCode) {
         body: JSON.stringify(query2),
     });
     const data2 = await deaths.json();
-    deathData = data2.value.slice();
+    deathData = data2.value;
 
     createChart(birthData, deathData);
 }
@@ -112,6 +112,10 @@ function createChart(birthData, deathData) {
         type: "bar",
         height: 450,
         colors: ["#63d0ff", "#363636"],
+        axisOptions: {
+            yAxisMode: 'span', // Set the y-axis mode
+            xIsSeries: true // Specify x-axis as series
+        },
     });
 }
 
