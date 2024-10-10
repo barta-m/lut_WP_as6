@@ -169,6 +169,6 @@ if (municipalityCode) {
     localStorage.setItem('municipalityCode', municipalityCode);
     fetchPopulationData(municipalityCode);
 } else {
-    return
+    return null
 }
 
