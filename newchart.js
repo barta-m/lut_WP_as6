@@ -128,7 +128,5 @@ window.onload = function () {
     const municipalityCode = localStorage.getItem("municipalityCode");
     if (municipalityCode) {
         fetchBirthAndDeathData(municipalityCode);
-    } else {
-        fetchBirthAndDeathData("SSS")
     }
 };

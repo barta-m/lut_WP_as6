@@ -99,6 +99,10 @@ async function fetchPopulationData(municipalityCode = "SSS") {
     const population = data.value;
     currentPopulationData = population; 
 
+    if (municipalityCode) {
+        localStorage.setItem("municipalityCode", municipalityCode);
+    }
+
     createChart(years, population);
 }
 
@@ -167,4 +171,3 @@ document.getElementById("add-data").addEventListener("click", function() {
 window.onload = function() {
     fetchPopulationData();
 };
-
