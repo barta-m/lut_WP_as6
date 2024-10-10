@@ -102,14 +102,14 @@ function createChart(birthData, deathData) {
                 {
                     name: "Births",
                     values: birthData,
-                    chartType: "bar",
-                    color: "#63d0ff"
+                    //chartType: "bar",
+                    //color: "#63d0ff"
                 },
                 {
                     name: "Deaths",
                     values: deathData,
-                    chartType: "bar",
-                    color: "#363636"
+                    //chartType: "bar",
+                    //color: "#363636"
                 }
             ]
         },
