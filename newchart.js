@@ -94,21 +94,22 @@ async function fetchBirthAndDeathData(municipalityCode) {
 
 function createChart(birthData, deathData) {
     const labels = [...Array(2022 - 2000).keys()].map(i => (2000 + i).toString());
+    const data = { labels: labels,
+    datasets: [
+        {
+            name: "Births",
+            values: birthData,
+            type: "bar"
+        },
+        {
+            name: "Deaths",
+            values: deathData,
+            type: "bar"
+        }
+    ]}
     const chart = new frappe.Chart("#chart", {
         title: "Births and Deaths Data",
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    name: "Births",
-                    values: birthData,
-                },
-                {
-                    name: "Deaths",
-                    values: deathData,
-                }
-            ]
-        },
+        data: data,
         type: "bar",
         height: 450,
         colors: ["#63d0ff", "#363636"],
