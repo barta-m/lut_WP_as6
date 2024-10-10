@@ -113,7 +113,7 @@ document.getElementById('add-data').addEventListener('click', function() {
     addPredictedData();
 });
 
-window.onload = fetchPopulationData();
+window.onload = fetchPopulationData("SSS");
 
 if (municipalityCode) {
     localStorage.setItem('municipalityCode', municipalityCode);
