@@ -116,11 +116,11 @@ function createChart(birthData, deathData) {
         type: "bar",
         height: 450,
         colors: ["#63d0ff", "#363636"],
-        axisOptions: {
-            xAxisMode: "tick",
-            yAxisMode: "span",
-            xIsSeries: true
-        }
+        // axisOptions: {
+        //     xAxisMode: "tick",
+        //     yAxisMode: "span",
+        //     xIsSeries: true
+        // }
     });
 }
 
