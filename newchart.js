@@ -3,7 +3,7 @@ let deathData = [];
 let municipalityCode;
 
 async function fetchBirthAndDeathData(municipalityCode) {
-    const url = 'https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px';
+    const url = "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px";
     const query1 = {
         "query": [
             {
@@ -74,16 +74,16 @@ async function fetchBirthAndDeathData(municipalityCode) {
     };
 
     const births = await fetch(url, {
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
+        method: "POST",
+        headers: { "content-type": "application/json" },
         body: JSON.stringify(query1),
     });
     const data = await births.json();
     birthData = data.value;
 
     const deaths = await fetch(url, {
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
+        method: "POST",
+        headers: { "content-type": "application/json" },
         body: JSON.stringify(query2),
     });
     const data2 = await deaths.json();
@@ -102,31 +102,33 @@ function createChart(birthData, deathData) {
                 {
                     name: "Births",
                     values: birthData,
-                    chartType: 'bar',
-                    color: '#63d0ff'
+                    chartType: "bar",
+                    color: "#63d0ff"
                 },
                 {
                     name: "Deaths",
                     values: deathData,
-                    chartType: 'bar',
-                    color: '#363636'
+                    chartType: "bar",
+                    color: "#363636"
                 }
             ]
         },
-        type: 'bar',
+        type: "bar",
         height: 450,
-        colors: ['#63d0ff', '#363636'],
+        colors: ["#63d0ff", "#363636"],
         axisOptions: {
-            xAxisMode: 'tick',
-            yAxisMode: 'span',
+            xAxisMode: "tick",
+            yAxisMode: "span",
             xIsSeries: true
         }
     });
 }
 
-window.onload = function() {
-    const municipalityCode = localStorage.getItem('municipalityCode');
+window.onload = function () {
+    const municipalityCode = localStorage.getItem("municipalityCode");
     if (municipalityCode) {
         fetchBirthAndDeathData(municipalityCode);
+    } else {
+        fetchBirthAndDeathData("SSS")
     }
 };

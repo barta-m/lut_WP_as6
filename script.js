@@ -2,7 +2,7 @@ let currentPopulationData = [];
 let municipalityCode;
 
 async function fetchPopulationDataDefault(){
-    const url = 'https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px';
+    const url = "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px";
     const jsonQuery = {
         "query": [
             {
@@ -39,8 +39,8 @@ async function fetchPopulationDataDefault(){
     };
 
     const res = await fetch(url, {
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
+        method: "POST",
+        headers: {"content-type": "application/json"},
         body: JSON.stringify(jsonQuery),
     });
 
@@ -52,7 +52,7 @@ async function fetchPopulationDataDefault(){
 }
 
 async function fetchPopulationData(municipalityCode = "SSS") {
-    const url = 'https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px';
+    const url = "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px";
     const jsonQuery = {
         "query": [
             {
@@ -89,8 +89,8 @@ async function fetchPopulationData(municipalityCode = "SSS") {
     };
 
     const res = await fetch(url, {
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
+        method: "POST",
+        headers: {"content-type": "application/json"},
         body: JSON.stringify(jsonQuery),
     });
 
@@ -103,7 +103,7 @@ async function fetchPopulationData(municipalityCode = "SSS") {
 }
 
 async function fetchMunicipalityCode(municipalityName) {
-    const url = 'https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px';
+    const url = "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px";
     const res = await fetch(url);
     const data = await res.json();
     const codes = data.variables[1].values;
@@ -140,34 +140,34 @@ function createChart(labels, data) {
                 }
             ]
         },
-        type: 'line',
+        type: "line",
         height: 450,
-        colors: ['#eb5146'],
+        colors: ["#eb5146"],
         axisOptions: {
-            xAxisMode: 'tick',
-            yAxisMode: 'span',
+            xAxisMode: "tick",
+            yAxisMode: "span",
             xIsSeries: true
         }
     });
 }
 
-document.getElementById('search-form').addEventListener('submit', async function(event) {
+document.getElementById("search-form").addEventListener("submit", async function(event) {
     event.preventDefault();
-    const municipalityName = document.getElementById('input-area').value;
+    const municipalityName = document.getElementById("input-area").value;
     const municipalityCode = await fetchMunicipalityCode(municipalityName);
     if (municipalityCode) {
         fetchPopulationData(municipalityCode);
     }
 });
 
-document.getElementById('add-data').addEventListener('click', function() {
+document.getElementById("add-data").addEventListener("click", function() {
     addPredictedData();
 });
 
 window.onload = fetchPopulationDataDefault();
 
 if (municipalityCode) {
-    localStorage.setItem('municipalityCode', municipalityCode);
+    localStorage.setItem("municipalityCode", municipalityCode);
     fetchPopulationData(municipalityCode);
 }
 
