@@ -168,7 +168,5 @@ window.onload = fetchPopulationDataDefault();
 if (municipalityCode) {
     localStorage.setItem('municipalityCode', municipalityCode);
     fetchPopulationData(municipalityCode);
-} else {
-    return null
 }
 
