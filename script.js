@@ -164,10 +164,7 @@ document.getElementById("add-data").addEventListener("click", function() {
     addPredictedData();
 });
 
-window.onload = fetchPopulationDataDefault();
-
-if (municipalityCode) {
-    localStorage.setItem("municipalityCode", municipalityCode);
-    fetchPopulationData(municipalityCode);
-}
+window.onload = function() {
+    fetchPopulationData();
+};
 
