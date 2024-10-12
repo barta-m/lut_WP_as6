@@ -100,28 +100,23 @@ function createChart(birthData, deathData) {
             {
                 name: "Births",
                 values: birthData,
-                type: 'bar'
             },
             {
                 name: "Deaths",
                 values: deathData,
-                type: 'bar'
             }
         ]
     }
     const chart = new frappe.Chart("#chart", {
         title: "Births and Deaths Data",
         data: data,
-        type: 'bar',
+        type: 'line',
         height: 450,
         colors: ["#63d0ff", "#363636"],
-        barOptions: {
-            stacked: 0
-        },
-        axisOptions: {
-            yAxisMode: 'span',
+        ///axisOptions: {
+            //yAxisMode: 'span',
             xIsSeries: true
-        },
+        //},
     });
 }
 
