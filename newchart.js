@@ -2,6 +2,34 @@ let birthData = [];
 let deathData = [];
 let municipalityCode;
 
+function createChart(data1, data2) {
+    const labels = [...Array(2022 - 2000).keys()].map(i => (2000 + i).toString());
+    const data = { 
+        labels: labels,
+        datasets: [
+            {
+                name: "Births",
+                values: data1,
+            },
+            {
+                name: "Deaths",
+                values: data2,
+            }
+        ]
+    }
+    const chart2 = new frappe.Chart("#chart", {
+        title: "Births and Deaths Data",
+        data: data,
+        type: 'bar',
+        height: 450,
+        colors: ["#63d0ff", "#363636"],
+        ///axisOptions: {
+            //yAxisMode: 'span',
+            //xIsSeries: true
+        //},
+    });
+}
+
 async function fetchBirthAndDeathData(municipalityCode) {
     const url = "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px";
     const query1 = {
@@ -90,34 +118,6 @@ async function fetchBirthAndDeathData(municipalityCode) {
     deathData = data2.value;
 
     createChart(birthData, deathData);
-}
-
-function createChart(birthData, deathData) {
-    const labels = [...Array(2022 - 2000).keys()].map(i => (2000 + i).toString());
-    const data = { 
-        labels: labels,
-        datasets: [
-            {
-                name: "Births",
-                values: birthData,
-            },
-            {
-                name: "Deaths",
-                values: deathData,
-            }
-        ]
-    }
-    const chart = new frappe.Chart("#chart", {
-        title: "Births and Deaths Data",
-        data: data,
-        type: 'line',
-        height: 450,
-        colors: ["#63d0ff", "#363636"],
-        ///axisOptions: {
-            //yAxisMode: 'span',
-            xIsSeries: true
-        //},
-    });
 }
 
 window.onload = function () {
