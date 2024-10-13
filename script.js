@@ -132,7 +132,6 @@ function addPredictedData() {
 }
 
 function createChart(labels, data) {
-    const chartElement = document.querySelector("#chart");
     const chart = new frappe.Chart("#chart", {
         title: "Data",
         data: {

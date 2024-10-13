@@ -3,7 +3,7 @@ let deathData = [];
 let municipalityCode;
 
 function createChart(data1, data2) {
-    const chartElement = document.querySelector("#chart2");
+    const chartElement = document.querySelector("#chart");
     const labels = [...Array(2022 - 2000).keys()].map(i => (2000 + i).toString());
     const data = { 
         labels: labels,
@@ -20,10 +20,10 @@ function createChart(data1, data2) {
             }
         ]
     }
-    const chart = new frappe.Chart("#chart2", {
+    const chart = new frappe.Chart("#chart", {
         title: "Births and Deaths Data",
         data: data,
-        type: "axis-mixed",
+        type: "bar",
         height: 450,
         colors: ["#63d0ff", "#363636"],
     });
