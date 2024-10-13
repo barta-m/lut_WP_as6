@@ -1,55 +1,55 @@
 let currentPopulationData = [];
 let municipalityCode;
 
-async function fetchPopulationDataDefault(){
-    const url = "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px";
-    const jsonQuery = {
-        "query": [
-            {
-                "code": "Vuosi",
-                "selection": {
-                    "filter": "item",
-                    "values": [
-                        "2000", "2001", "2002", "2003", "2004",
-                        "2005", "2006", "2007", "2008", "2009",
-                        "2010", "2011", "2012", "2013", "2014",
-                        "2015", "2016", "2017", "2018", "2019",
-                        "2020", "2021"
-                    ]
-                }
-            },
-            {
-                "code": "Alue",
-                "selection": {
-                    "filter": "item",
-                    "values": ["SSS"]
-                }
-            },
-            {
-                "code": "Tiedot",
-                "selection": {
-                    "filter": "item",
-                    "values": ["vaesto"]
-                }
-            }
-        ],
-        "response": {
-            "format": "json-stat2"
-        }
-    };
+// async function fetchPopulationDataDefault(){
+//     const url = "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px";
+//     const jsonQuery = {
+//         "query": [
+//             {
+//                 "code": "Vuosi",
+//                 "selection": {
+//                     "filter": "item",
+//                     "values": [
+//                         "2000", "2001", "2002", "2003", "2004",
+//                         "2005", "2006", "2007", "2008", "2009",
+//                         "2010", "2011", "2012", "2013", "2014",
+//                         "2015", "2016", "2017", "2018", "2019",
+//                         "2020", "2021"
+//                     ]
+//                 }
+//             },
+//             {
+//                 "code": "Alue",
+//                 "selection": {
+//                     "filter": "item",
+//                     "values": ["SSS"]
+//                 }
+//             },
+//             {
+//                 "code": "Tiedot",
+//                 "selection": {
+//                     "filter": "item",
+//                     "values": ["vaesto"]
+//                 }
+//             }
+//         ],
+//         "response": {
+//             "format": "json-stat2"
+//         }
+//     };
 
-    const res = await fetch(url, {
-        method: "POST",
-        headers: {"content-type": "application/json"},
-        body: JSON.stringify(jsonQuery),
-    });
+//     const res = await fetch(url, {
+//         method: "POST",
+//         headers: {"content-type": "application/json"},
+//         body: JSON.stringify(jsonQuery),
+//     });
 
-    const data = await res.json();
-    const years = Object.keys(data.dimension.Vuosi.category.label);
-    const population = data.value;
-    currentPopulationData = population; 
-    createChart(years, population);
-}
+//     const data = await res.json();
+//     const years = Object.keys(data.dimension.Vuosi.category.label);
+//     const population = data.value;
+//     currentPopulationData = population; 
+//     createChart(years, population);
+// }
 
 async function fetchPopulationData(municipalityCode = "SSS") {
     const url = "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px";
@@ -123,8 +123,8 @@ function addPredictedData() {
         deltas.push(currentPopulationData[i] - currentPopulationData[i - 1]);
     }
     const meanDelta = deltas.reduce((sum, delta) => sum + delta, 0) / deltas.length;
-    const predictedNextValue = currentPopulationData[currentPopulationData.length - 1] + meanDelta;
-    currentPopulationData.push(predictedNextValue);
+    const nextValue = currentPopulationData[currentPopulationData.length - 1] + meanDelta;
+    currentPopulationData.push(nextValue);
     const labels = [...Array(2022 - 2000).keys()].map(i => (2000 + i).toString());
     labels.push("2022");
 
