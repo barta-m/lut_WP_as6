@@ -23,7 +23,7 @@ function createChart(data1, data2) {
     const chart = new frappe.Chart("#chart2", {
         title: "Births and Deaths Data",
         data: data,
-        type: "bar",
+        type: "axis-mixed",
         height: 450,
         colors: ["#63d0ff", "#363636"],
     });
